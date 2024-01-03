@@ -2,6 +2,7 @@
 const ROCK = "rock";
 const PAPER = "paper";
 const SCISSORS = "scissors";
+const TIE = "tie";
 
 /** 
  *Generates randomly the computer choice in Rock Paper scissors game
@@ -30,9 +31,7 @@ function getPlayerChoice() {
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
         console.log("It's a tie, let's replay this round");
-        playerSelection = getPlayerChoice();
-        computerSelection = getComputerChoice();
-        playRound(playerSelection, computerSelection);
+        return TIE;
     }
     if (playerSelection === ROCK) {
         if( computerSelection === PAPER ) {
@@ -66,16 +65,22 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+/**
+ * Let user to play a Best of five game
+ */
 function game() {
     let isGameInProgress = true;
     let winCount = {player: 0, computer: 0}
 
     while(isGameInProgress) {
-        console.log(winCount);
         let playerSelection = getPlayerChoice();
         let computerSelection = getComputerChoice();
-        const winner = playRound(playerSelection, computerSelection);
-        winCount[winner] ++;
+
+        const result = playRound(playerSelection, computerSelection);
+
+        if (result != TIE) {
+            winCount[result] ++;
+        }
         if (winCount.player === 3) {
             isGameInProgress = false;
             console.log("Congrats! You've won!");
@@ -84,5 +89,5 @@ function game() {
             console.log("You've lost this time! Try again!");
         }
     }
-    console.log(winCount);
+    console.log(`Final result is Player: ${winCount.player} - Computer: ${winCount.computer}`);
 }
