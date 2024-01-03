@@ -3,6 +3,7 @@ const ROCK = "rock";
 const PAPER = "paper";
 const SCISSORS = "scissors";
 const TIE = "tie";
+const WRONG_VALUE = "Wrong value";
 
 /** 
  *Generates randomly the computer choice in Rock Paper scissors game
@@ -59,9 +60,7 @@ function playRound(playerSelection, computerSelection) {
         }
     } else {
         console.log("Please enter a valid value.")
-        playerSelection = getPlayerChoice()
-        computerSelection = getComputerChoice();
-        playRound(playerSelection, computerSelection);
+        return WRONG_VALUE;
     }
 }
 
@@ -78,7 +77,7 @@ function game() {
 
         const result = playRound(playerSelection, computerSelection);
 
-        if (result != TIE) {
+        if (result != TIE || result != WRONG_VALUE) {
             winCount[result] ++;
         }
         if (winCount.player === 3) {
