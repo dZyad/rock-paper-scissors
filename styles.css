@@ -34,3 +34,33 @@ footer {
 main {
     flex: 1 0 auto;
 }
+
+.score {
+    display: flex;
+}
+
+.scorecard {
+    margin: 50px 10px;
+    width: 20vw;
+    text-align: center;
+}
+
+h2{
+    margin: 0;
+    font-size: 1rem;
+}
+
+.scoreboard{
+    text-align: center;
+    font-size: 3rem;
+    border: var(--retro-black-color) solid 1px;
+}
+
+.options {
+    display: flex;
+    justify-content: space-around;
+}
+
+.options button {
+    font-size: 5rem;
+}
