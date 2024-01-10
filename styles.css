@@ -58,7 +58,8 @@ h2{
 
 .options {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 5vw;
 }
 
 .options button {
