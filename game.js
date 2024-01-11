@@ -16,7 +16,8 @@ computerScore.textContent = winCount.computer;
 
 options.forEach(btn => {
     btn.addEventListener('click', event => {
-        let result = playRound(event.target.alt, getComputerChoice());
+        let result = playRound(event.target.id, getComputerChoice());
+        console.log(event.target.id);
         updateWinCount(winCount, result);  
     });
 });
