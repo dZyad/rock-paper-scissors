@@ -93,13 +93,14 @@ const stopGame = () => {
     let endGameScreen = document.createElement('div');
     endGameScreen.id = "end-game"
     let endGameMessage = document.createElement('p');
-    let restartGame = document.createElement('button');
-    restartGame.textContent = "Restart Game";
-    restartGame.className = "restart-button";
+    let restartGameButton = document.createElement('button');
+    restartGameButton.textContent = "Restart Game";
+    restartGameButton.className = "restart-button";
     toggleGameVisibility();
+    restartGameButton.addEventListener('click', restartGame)
     endGameMessage.textContent = winnerMessage();
     endGameScreen.appendChild(endGameMessage);
-    endGameScreen.appendChild(restartGame);
+    endGameScreen.appendChild(restartGameButton);
     main.appendChild(endGameScreen);
 }
 
@@ -113,4 +114,15 @@ const winnerMessage = () => {
     return winCount.player == WIN_CONDITION
     ? `Congrats You've won ${winCount.player} - ${winCount.computer}`
     : `You've lost ${winCount.computer} - ${winCount.player}`;
+}
+
+let restartGame = () => {
+    const main = document.querySelector('main');
+    const endGameScreen = document.querySelector('#end-game');
+    winCount.player = 0;
+    winCount.computer = 0;
+    userScore.textContent = winCount.player;
+    computerScore.textContent = winCount.computer;
+    toggleGameVisibility();
+    main.removeChild(endGameScreen);
 }
