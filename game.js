@@ -77,9 +77,7 @@ let updateWinCount = (winCount, result) => {
     }
     userScore.textContent = winCount.player;
     computerScore.textContent = winCount.computer;
-    console.log(checkWinner());
     if (checkWinner()) {
-        console.log("someone won!");
         stopGame();
     };
 }
