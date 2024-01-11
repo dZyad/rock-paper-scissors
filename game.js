@@ -1,4 +1,5 @@
 // Game constants
+const WIN_CONDITION = 5;
 const ROCK = "rock";
 const PAPER = "paper";
 const SCISSORS = "scissors";
@@ -27,7 +28,7 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
-    let lastRound = document.querySelector('.last-round');
+    let lastRound = document.querySelector('.last-round-display');
     lastRound.removeChild(lastRound.firstChild);
     let display = displayLastRound(playerSelection, computerSelection);
     lastRound.appendChild(display);
@@ -56,8 +57,17 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function displayLastRound(playerChoice, computerChoice) {
-    let lastChoices = document.createElement('p');
-    lastChoices.textContent = `Player: ${playerChoice}, Computer: ${computerChoice}`;
+    let lastChoices = document.createElement('div');
+    let userLastChoice = document.createElement('img');
+    let computerLastChoice = document.createElement('img');
+
+    lastChoices.className = "last-round";
+    userLastChoice.src = `images/${playerChoice}.svg`;
+    computerLastChoice.src = `images/${computerChoice}.svg`;
+    userLastChoice.className = "last-choice-image";
+    computerLastChoice.className = "last-choice-image"
+    lastChoices.appendChild(userLastChoice);
+    lastChoices.appendChild(computerLastChoice);
     return lastChoices;
 }
 
@@ -67,4 +77,40 @@ let updateWinCount = (winCount, result) => {
     }
     userScore.textContent = winCount.player;
     computerScore.textContent = winCount.computer;
+    console.log(checkWinner());
+    if (checkWinner()) {
+        console.log("someone won!");
+        stopGame();
+    };
+}
+
+const checkWinner = () => {
+    return winCount.player == WIN_CONDITION || winCount.computer == WIN_CONDITION;
+}
+
+const stopGame = () => {
+    const main = document.querySelector('main')
+    let endGameScreen = document.createElement('div');
+    endGameScreen.id = "end-game"
+    let endGameMessage = document.createElement('p');
+    let restartGame = document.createElement('button');
+    restartGame.textContent = "Restart Game";
+    restartGame.className = "restart-button";
+    toggleGameVisibility();
+    endGameMessage.textContent = winnerMessage();
+    endGameScreen.appendChild(endGameMessage);
+    endGameScreen.appendChild(restartGame);
+    main.appendChild(endGameScreen);
+}
+
+const toggleGameVisibility = () => {
+    options.forEach(btn => {
+        btn.style.visibility = btn.style.visibility != "hidden" ? "hidden" : "visible";
+    });
+}
+
+const winnerMessage = () => {
+    return winCount.player == WIN_CONDITION
+    ? `Congrats You've won ${winCount.player} - ${winCount.computer}`
+    : `You've lost ${winCount.computer} - ${winCount.player}`;
 }

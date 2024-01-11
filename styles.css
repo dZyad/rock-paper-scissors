@@ -33,6 +33,8 @@ footer {
   
 main {
     flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .score {
@@ -40,9 +42,13 @@ main {
 }
 
 .scorecard {
-    margin: 50px 10px;
+    margin: 20px 0px;
     width: 20vw;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 h2{
@@ -53,15 +59,55 @@ h2{
 .scoreboard{
     text-align: center;
     font-size: 3rem;
+    width: 5rem;
     border: var(--retro-black-color) solid 1px;
 }
 
 .options {
     display: flex;
     justify-content: center;
-    gap: 5vw;
+    gap: 3vw;
 }
 
 .options button {
-    padding: 0;
+    padding: 10px;
+}
+
+.last-round-display {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.last-round {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 20px;
+}
+
+.last-choice-image {
+    max-width: 200px;
+    border: var(--retro-black-color) solid 1px;
+}
+
+#end-game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: -120px;
+    gap: 20px;
+}
+
+#end-game > p {
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 0;
+}
+
+.restart-button {
+    font-size: 2rem;
+    padding: 5px;
 }
