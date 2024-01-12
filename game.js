@@ -7,7 +7,7 @@ const TIE = "tie";
 let winCount = {player: 0, computer: 0};
 
 const options = document.querySelectorAll('.options > button');
-
+let lastRoundDisplay = document.querySelector('.last-round-display');
 
 let userScore = document.querySelector('#user-score');
 let computerScore = document.querySelector('#computer-score');
@@ -17,7 +17,6 @@ computerScore.textContent = winCount.computer;
 options.forEach(btn => {
     btn.addEventListener('click', event => {
         let result = playRound(event.target.id, getComputerChoice());
-        console.log(event.target.id);
         updateWinCount(winCount, result);  
     });
 });
@@ -29,10 +28,9 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
-    let lastRound = document.querySelector('.last-round-display');
-    lastRound.removeChild(lastRound.firstChild);
+    refreshLastRound();
     let display = displayLastRound(playerSelection, computerSelection);
-    lastRound.appendChild(display);
+    lastRoundDisplay.appendChild(display);
     if (playerSelection === computerSelection) {
         return TIE;
     }
@@ -96,7 +94,7 @@ const stopGame = () => {
     restartGameButton.textContent = "Restart Game";
     restartGameButton.className = "restart-button";
     toggleGameVisibility();
-    restartGameButton.addEventListener('click', restartGame)
+    restartGameButton.addEventListener('click', restartGame);
     endGameMessage.textContent = winnerMessage();
     endGameScreen.appendChild(endGameMessage);
     endGameScreen.appendChild(restartGameButton);
@@ -124,4 +122,11 @@ let restartGame = () => {
     computerScore.textContent = winCount.computer;
     toggleGameVisibility();
     main.removeChild(endGameScreen);
+    refreshLastRound();
+}
+
+let refreshLastRound = () => {
+    if (lastRoundDisplay.firstChild) {
+        lastRoundDisplay.removeChild(lastRoundDisplay.firstChild);
+    }
 }
